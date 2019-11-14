@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const mongoDB = 'mongodb+srv://admin:nothing@cluster0-lk0ot.mongodb.net/test?retryWrites=true&w=majority';
+const mongoDB = 'mongodb+srv://admin:admin@cluster0-9c16h.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(mongoDB,{useNewUrlParser:true});
 
 app.use(cors());
@@ -118,5 +118,22 @@ app.get('/hello/:name', (req, res) => {
     console.log(req.params.name);
     res.send('Hello ' + req.params.name)
 })
+app.put('/api/movies/:id', (req, res)=>{
+    console.log("Edit: "+req.params.id);
+    console.log(req.body);
+    MovieModel.findByIdAndUpdate(req.params.id,
+       
+        req.body,
+        {new:true},
+        (error,data)=>{
+            res.json(data);
+        })
+})
 
+app.get('/api/movies/:id', (req, res)=>{
+    console.log("GET" + req.params.id);
+    MovieModel.findById(req.params.id,(error,data)=>{
+        res.json(data);
+    })
+})
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

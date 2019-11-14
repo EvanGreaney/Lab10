@@ -32,7 +32,7 @@ class MovieItem extends React.Component{
   <Card.Header>{this.props.movie.title}</Card.Header>
   <Card.Body>
     <blockquote className="blockquote mb-0">
-    <img src={this.props.movie.poster}></img>
+    <img src={this.props.movie.poster} width = {400} height = {600}></img>
       <footer>
       {this.props.movie.year}
       </footer>
@@ -41,6 +41,7 @@ class MovieItem extends React.Component{
   <Button variant="danger" onClick={this.DeleteMovie}>Delete</Button>
 <Link to={"/edit/" + this.props.movie._id} className="btn btn-primary">Edit</Link>
 </Card>
+<br></br>
             </div>
         )
     }
